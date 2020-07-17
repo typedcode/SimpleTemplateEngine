@@ -11,6 +11,9 @@ class SimpleTemplateEngine {
     private $regStringValue;
     private $regVar;
     private $regFunction;
+    private $cssFilePaths = array();
+    private $jsFilePaths = array();
+
 
     /**
      * Directory where the templates are located.
@@ -490,6 +493,30 @@ class SimpleTemplateEngine {
             }
 
         throw new Exception( "TEMPLATE ERROR: Value '" . $value . "' could not be evaluated to a boolean value." );
+    }
+
+    public function addCSSFilePath( $cssFilePath ) {
+        if( in_array( $cssFilePath, $this->cssFilePaths ) ) {
+            return;
+        }
+
+        array_push( $this->cssFilePaths, $cssFilePath );
+    }
+
+    public function getCSSFilePaths() : array {
+        return $this->cssFilePaths;
+    }
+
+    public function addJSFilePath( $jsFilePath ) {
+        if( in_array( $jsFilePath, $this->jsFilePaths ) ) {
+            return;
+        }
+
+        array_push( $this->jsFilePaths, $jsFilePath );
+    }
+
+    public function getJSFilePaths() : array {
+        return $this->jsFilePaths;
     }
 }
 
