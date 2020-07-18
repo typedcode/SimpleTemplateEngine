@@ -2,6 +2,7 @@
 
 /**
  * @author Markus Hoffmann
+ * SimpleTemplateEngine Version 0.1
  */
 
 class SimpleTemplateEngine {
@@ -91,9 +92,32 @@ class SimpleTemplateEngine {
         $parseString = $this->evaluateForeach( $parseString, $additionalVars );
         $parseString = $this->evaluateInclude( $parseString, $additionalVars );
         $parseString = $this->evaluateIfs( $parseString, $additionalVars );
+        $parseString = $this->evaluateForeachCSS( $parseString );
         $parseString = $this->substituteVars( $parseString, $additionalVars );
 
         return $parseString;
+    }
+
+    private function evaluateForeachCSS( $content ) {
+        $result = preg_match( "/(\{foreachcss})(.*)({\/foreachcss})/", $content, $matches, PREG_OFFSET_CAPTURE );
+
+        if( $result == 0 ) {
+            return $content;
+        }
+
+        $before = substr( $content, 0, $matches[0][1] );
+        $cssCode = $matches[2][0];
+        $after = substr( $content, $matches[3][1] + 13 );
+
+        $content = $before;
+
+        foreach( $this->cssFilePaths as $cssPath ) {
+            $content .= str_replace( "{__CSS}", $cssPath, $cssCode );
+        }
+
+        $content .= $after;
+
+        return $content;
     }
 
     private function evaluateForeach( $content, $additionalVars = array() ) {
@@ -104,6 +128,7 @@ class SimpleTemplateEngine {
         if( sizeof( $results ) == 0 ) {
             return $content;
         }
+
         $before = substr( $content, 0, $results[ 0 ][ 1 ] );
         $foreachContentStart = strlen( $results[ 0 ][ 0 ] ) + $results[ 0 ][ 1 ];
         $depth = 0;
