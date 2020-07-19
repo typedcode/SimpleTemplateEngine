@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.1
+ * SimpleTemplateEngine Version 0.2
  */
 
 class SimpleTemplateEngine {
@@ -93,6 +93,7 @@ class SimpleTemplateEngine {
         $parseString = $this->evaluateInclude( $parseString, $additionalVars );
         $parseString = $this->evaluateIfs( $parseString, $additionalVars );
         $parseString = $this->evaluateForeachCSS( $parseString );
+        $parseString = $this->evaluateForeachJS( $parseString );
         $parseString = $this->substituteVars( $parseString, $additionalVars );
 
         return $parseString;
@@ -112,7 +113,29 @@ class SimpleTemplateEngine {
         $content = $before;
 
         foreach( $this->cssFilePaths as $cssPath ) {
-            $content .= str_replace( "{__CSS}", $cssPath, $cssCode );
+            $content .= str_replace( "{\$__CSS}", $cssPath, $cssCode );
+        }
+
+        $content .= $after;
+
+        return $content;
+    }
+
+    private function evaluateForeachJS( $content ) {
+        $result = preg_match( "/(\{foreachjs})(.*)({\/foreachjs})/", $content, $matches, PREG_OFFSET_CAPTURE );
+
+        if( $result == 0 ) {
+            return $content;
+        }
+
+        $before = substr( $content, 0, $matches[0][1] );
+        $jsCode = $matches[2][0];
+        $after = substr( $content, $matches[3][1] + 12 );
+
+        $content = $before;
+
+        foreach( $this->jsFilePaths as $jsPath ) {
+            $content .= str_replace( "{\$__JS}", $jsPath, $jsCode );
         }
 
         $content .= $after;
