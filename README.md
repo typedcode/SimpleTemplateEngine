@@ -4,7 +4,6 @@ SimpleTemplateEngine
 Simple Template Engine written in PHP
 
 * [CSS and JS files](#css-and-js-files)
-* [Verweis auf Test](#test)
 
 CSS and JS Files
 ----------------
@@ -47,7 +46,3 @@ Will result in the output:
 ```
 
 For JS simply use `$engine->addJSFilePath( $path )` to set the paths and `{foreachjs}...{/foreachjs}` in the template file.
-
-TEST
-----
-hier steht noch was
