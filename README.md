@@ -3,7 +3,22 @@ SimpleTemplateEngine
 
 Simple Template Engine written in PHP
 
-* [CSS and JS files](#css-and-js-files)
+1. [Initialization](#initialization)
+1. [CSS and JS files](#css-and-js-files)
+
+Initialization
+--------------
+With initializing the Engine you also set the Template-Directory. The Template Directory is the directory where the Engine will search for the Files to parse (the template files). If you don't enter a template path the templates will be searched relative to the current path.
+
+E.g.
+```
+$engine = new SimpleTemplateEngine();
+```
+Will initialize the Engine with the current Directory as the Template-Directory.
+```
+$engine = new SimpleTemplateEngine( "./templates" );
+```
+Will initialize the Engine with the given template path. When parsing templates they will be expected relative to the given path.
 
 CSS and JS Files
 ----------------
