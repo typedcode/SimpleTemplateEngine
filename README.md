@@ -4,6 +4,8 @@ SimpleTemplateEngine
 Simple Template Engine written in PHP
 
 1. [Initialization](#initialization)
+1. [Parsing a template](#parsing-a-template)
+1. [Assigning and using variables](#assigning-and-using-variables)
 1. [CSS and JS files](#css-and-js-files)
 
 Initialization
@@ -11,14 +13,40 @@ Initialization
 With initializing the Engine you also set the Template-Directory. The Template Directory is the directory where the Engine will search for the Files to parse (the template files). If you don't enter a template path the templates will be searched relative to the current path.
 
 E.g.
-```
+```php
 $engine = new SimpleTemplateEngine();
 ```
 Will initialize the Engine with the current Directory as the Template-Directory.
-```
+```php
 $engine = new SimpleTemplateEngine( "./templates" );
 ```
 Will initialize the Engine with the given template path. When parsing templates they will be expected relative to the given path.
+
+Parsing a template
+------------------
+For getting a result out of the engine one must parse a template file.
+```php
+echo $engine->parse( "myTemplate.html" );
+```
+This will trigger the parsing process within the engine. Here `myTemplate.html` has to be a file inside the `template`-Directory which was set with the initialization. The parsed Result will be returned as a string.
+
+Assigning and using variables
+-----------------------------
+Assigning a variable is done by the `assign( $key, $value )`-Method.
+
+E.g. the following php-script
+```php
+$myVariable = "This is a dummy text.";
+$engine->assign( 'dummyText', $myVariable );
+```
+when parsed with this Template
+```html
+<div>{$dummyText}</div>
+```
+Will result in
+```html
+<div>This is a dummy text.</div>
+```
 
 CSS and JS Files
 ----------------
