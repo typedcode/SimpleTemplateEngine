@@ -47,6 +47,13 @@ Will result in
 ```html
 <div>This is a dummy text.</div>
 ```
+One is not limited in assigning String values. One also can assign objects and access fields or functions:
+```html
+<!-- Accessing a field -->
+{$object->myField}
+<!-- Accessing a function return value -->
+{$object->function()}
+```
 
 CSS and JS Files
 ----------------
