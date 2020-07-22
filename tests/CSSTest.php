@@ -50,6 +50,12 @@ class CSSTest extends TemplateEngineTestBase {
                                     "<link rel=\"stylesheet\" type=\"text/css\" href=\"my/css3/path3.css\">after",
                              $this->engine->parse( "foreachCSS/foreachCSS.html" ) );
     }
+
+    public function testForeachCSSMultilineForeach() {
+        $this->engine->addCSSFilePath( "my/css/path.css" );
+        $this->assertEquals( "\n<link rel=\"stylesheet\" type=\"text/css\" href=\"my/css/path.css\">\n",
+                             $this->engine->parse( "foreachCSS/foreachCSSMultiline.html" ) );
+    }
 }
 
 ?>

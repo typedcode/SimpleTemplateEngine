@@ -51,6 +51,12 @@ class JSTest extends TemplateEngineTestBase {
                                     "<script src=\"my/js3/path3.js\"></script>after",
                              $this->engine->parse( "foreachJS/foreachJS.html" ) );
     }
+
+    public function testForeachJSMultilineForeach() {
+        $this->engine->addJSFilePath( "my/js/path.js" );
+        $this->assertEquals( "\n<script src=\"my/js/path.js\"></script>\n",
+                             $this->engine->parse( "foreachJS/foreachJSMultiline.html" ) );
+    }
 }
 
 ?>

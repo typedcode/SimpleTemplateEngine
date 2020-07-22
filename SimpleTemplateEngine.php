@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.2
+ * SimpleTemplateEngine Version 0.3
  */
 
 class SimpleTemplateEngine {
@@ -100,7 +100,7 @@ class SimpleTemplateEngine {
     }
 
     private function evaluateForeachCSS( $content ) {
-        $result = preg_match( "/(\{foreachcss})(.*)({\/foreachcss})/", $content, $matches, PREG_OFFSET_CAPTURE );
+        $result = preg_match( "/(\{foreachcss})(.*)({\/foreachcss})/s", $content, $matches, PREG_OFFSET_CAPTURE );
 
         if( $result == 0 ) {
             return $content;
@@ -122,7 +122,7 @@ class SimpleTemplateEngine {
     }
 
     private function evaluateForeachJS( $content ) {
-        $result = preg_match( "/(\{foreachjs})(.*)({\/foreachjs})/", $content, $matches, PREG_OFFSET_CAPTURE );
+        $result = preg_match( "/(\{foreachjs})(.*)({\/foreachjs})/s", $content, $matches, PREG_OFFSET_CAPTURE );
 
         if( $result == 0 ) {
             return $content;
