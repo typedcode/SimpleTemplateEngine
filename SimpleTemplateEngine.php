@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.4
+ * SimpleTemplateEngine Version 0.5
  */
 
 class SimpleTemplateEngine {
@@ -49,6 +49,10 @@ class SimpleTemplateEngine {
 
         $this->regVar = "(\\$" . $this->allowedSignes ."+)";
         $this->regFunction = "(->" . $this->allowedSignes ."+\(\))";
+
+        if( isset( $_SESSION ) ) {
+            $this->assign( "SESSION", $_SESSION );
+        }
     }
 
     /**

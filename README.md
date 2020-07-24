@@ -6,6 +6,7 @@ Simple Template Engine written in PHP
 1. [Initialization](#initialization)
 1. [Parsing a template](#parsing-a-template)
 1. [Assigning and using variables](#assigning-and-using-variables)
+1. [Using session variables](#using-session-variables)
 1. [CSS and JS files](#css-and-js-files)
 
 Initialization
@@ -68,6 +69,11 @@ Can be accessed like this
 <div>{$array->key}</div> <!-- for the associative array-->
 ```
 Chaining is not supported.
+
+Using session variables
+-----------------------
+If a session was started when the engine is initialized a session variable will be automatically set and can be accessed in the template through `{$SESSION->identifier}`
+
 
 CSS and JS Files
 ----------------

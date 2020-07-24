@@ -75,6 +75,16 @@ class VarSubstitutionTest extends TemplateEngineTestBase{
 
         $this->assertEquals( "value", $result );
     }
+
+    public function testSessionSubstitution() {
+        session_start();
+        $_SESSION[ "sessionVar" ] = "sessionValue";
+        $this->setUp();
+        
+        $this->assertEquals( "sessionValue", $this->engine->parse( "varSubstitution/sessionVariables.html") );
+
+        session_destroy();
+    }
 }
 
 ?>
