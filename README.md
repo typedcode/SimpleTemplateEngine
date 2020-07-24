@@ -54,6 +54,20 @@ One is not limited in assigning String values. One also can assign objects and a
 <!-- Accessing a function return value -->
 {$object->function()}
 ```
+Accessing an array can be done via the arrow notation `->`.
+```php
+$array = array( "value" );
+//or
+$array = array( "key" => "value" );
+
+$engine->assign( "array", $array );
+```
+Can be accessed like this
+```html
+<div>{$array->0}</div> <!-- for the indexed array -->
+<div>{$array->key}</div> <!-- for the associative array-->
+```
+Chaining is not supported.
 
 CSS and JS Files
 ----------------

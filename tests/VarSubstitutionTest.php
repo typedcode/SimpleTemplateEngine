@@ -56,6 +56,25 @@ class VarSubstitutionTest extends TemplateEngineTestBase{
         $this->expectExceptionMessage( "TEMPLATE ERROR: 'obj' ist not assigned." );
         $this->engine->parse( "varSubstitution/objectVar.html" );
     }
+
+    public function testArrayAssociative() {
+        $array = array( "key" => "value" );
+        $this->engine->assign( "array", $array );
+
+        $result = $this->engine->parse( "varSubstitution/arrayAssociative.html" );
+
+        $this->assertEquals( "value", $result );
+    }
+
+    public function testArrayIndex() {
+        $array = array();
+        array_push( $array, "value" );
+        $this->engine->assign( "array", $array );
+
+        $result = $this->engine->parse( "varSubstitution/arrayIndex.html" );
+
+        $this->assertEquals( "value", $result );
+    }
 }
 
 ?>

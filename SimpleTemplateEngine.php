@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.3
+ * SimpleTemplateEngine Version 0.4
  */
 
 class SimpleTemplateEngine {
@@ -244,7 +244,7 @@ class SimpleTemplateEngine {
             throw new Exception( "TEMPLATE ERROR: '" . $varName . "' ist not assigned." );
         }
 
-        if( ! empty( $functionOrMemberName ) ) {
+        if( strlen( $functionOrMemberName ) > 0 ) {
 
             $execute = rtrim( $functionOrMemberName, "()" );
 
