@@ -57,6 +57,13 @@ class JSTest extends TemplateEngineTestBase {
         $this->assertEquals( "\n<script src=\"my/js/path.js\"></script>\n",
                              $this->engine->parse( "foreachJS/foreachJSMultiline.html" ) );
     }
+
+    public function testAddEmptyString() {
+        $this->engine->addJSFilePath( "" );
+        $this->assertEquals( "beforeafter",
+                             $this->engine->parse( "foreachJS/foreachJS.html" ) );
+        $this->assertTrue( empty( $this->engine->getJSFilePaths() ) );
+    }
 }
 
 ?>

@@ -56,6 +56,13 @@ class CSSTest extends TemplateEngineTestBase {
         $this->assertEquals( "\n<link rel=\"stylesheet\" type=\"text/css\" href=\"my/css/path.css\">\n",
                              $this->engine->parse( "foreachCSS/foreachCSSMultiline.html" ) );
     }
+
+    public function testAddEmptyString() {
+        $this->engine->addCSSFilePath( "" );
+        $this->assertEquals( "beforeafter",
+                             $this->engine->parse( "foreachCSS/foreachCSS.html" ) );
+        $this->assertTrue( empty( $this->engine->getCSSFilePaths() ) );
+    }
 }
 
 ?>

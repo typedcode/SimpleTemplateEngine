@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.5
+ * SimpleTemplateEngine Version 0.6
  */
 
 class SimpleTemplateEngine {
@@ -548,7 +548,7 @@ class SimpleTemplateEngine {
     }
 
     public function addCSSFilePath( $cssFilePath ) {
-        if( in_array( $cssFilePath, $this->cssFilePaths ) ) {
+        if( empty( $cssFilePath ) || in_array( $cssFilePath, $this->cssFilePaths ) ) {
             return;
         }
 
@@ -560,7 +560,7 @@ class SimpleTemplateEngine {
     }
 
     public function addJSFilePath( $jsFilePath ) {
-        if( in_array( $jsFilePath, $this->jsFilePaths ) ) {
+        if( empty( $jsFilePath ) ||  in_array( $jsFilePath, $this->jsFilePaths ) ) {
             return;
         }
 
