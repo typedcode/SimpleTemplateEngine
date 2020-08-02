@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.6
+ * SimpleTemplateEngine Version 0.7
  */
 
 class SimpleTemplateEngine {
@@ -93,9 +93,9 @@ class SimpleTemplateEngine {
     }
 
     private function parseImpl( $parseString, $additionalVars = array() ) {
+        $parseString = $this->evaluateIfs( $parseString, $additionalVars );
         $parseString = $this->evaluateForeach( $parseString, $additionalVars );
         $parseString = $this->evaluateInclude( $parseString, $additionalVars );
-        $parseString = $this->evaluateIfs( $parseString, $additionalVars );
         $parseString = $this->evaluateForeachCSS( $parseString );
         $parseString = $this->evaluateForeachJS( $parseString );
         $parseString = $this->substituteVars( $parseString, $additionalVars );
