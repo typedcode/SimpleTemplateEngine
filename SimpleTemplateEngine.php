@@ -2,7 +2,7 @@
 
 /**
  * @author Markus Hoffmann
- * SimpleTemplateEngine Version 0.7
+ * SimpleTemplateEngine Version 0.8
  */
 
 class SimpleTemplateEngine {
@@ -302,7 +302,7 @@ class SimpleTemplateEngine {
      * Searches for patterns like {if TEST} {fi} in the template and evaluates them.
      */
     private function evaluateIfs( $content, $additionalVars = array() ) {
-        preg_match_all( "/\{if [^\}]+\}|\{else\}|\{fi\}/", $content, $matches, PREG_OFFSET_CAPTURE );
+        preg_match_all( "/\{if [^\}]+\}|\{else\}|\{\/if\}/", $content, $matches, PREG_OFFSET_CAPTURE );
 
         $results = $matches[ 0 ];
 
@@ -327,14 +327,14 @@ class SimpleTemplateEngine {
                 }
 
                 if( $depth == 0 ) {
-                    if( $current[ 0 ] === "{fi}" ) {
+                    if( $current[ 0 ] === "{/if}" ) {
                         if( $elseContentStartIndex === -1 ) {
                             $ifContent = substr( $content, $ifContentStartIndex, $current[ 1 ] - $ifContentStartIndex );
                         }
                         else {
                             $elseContent = substr( $content, $elseContentStartIndex, $current[ 1 ] - $elseContentStartIndex );
                         }
-                        $after = substr( $content, $current[ 1 ] + 4 );
+                        $after = substr( $content, $current[ 1 ] + 5 );
                         break;
                     }
                     else {
@@ -343,7 +343,7 @@ class SimpleTemplateEngine {
                         $elseContentStartIndex = $current[ 1 ] + 6;
                     }
                 }
-                else if( $current[ 0 ] === "{fi}" ) {
+                else if( $current[ 0 ] === "{/if}" ) {
                     $depth--;
                     continue;
                 }
@@ -360,7 +360,7 @@ class SimpleTemplateEngine {
 
             $content .= $after;
 
-            preg_match_all( "/\{if[^\}]+\}|\{else\}|\{fi\}/", $content, $matches, PREG_OFFSET_CAPTURE );
+            preg_match_all( "/\{if[^\}]+\}|\{else\}|\{\/if\}/", $content, $matches, PREG_OFFSET_CAPTURE );
 
             $results = $matches[ 0 ];
 
