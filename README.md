@@ -107,10 +107,8 @@ Will result in the output:
 ```html
 <html>
     <head>
-        {foreachcss}
-            <link rel="stylesheet" type="text/css" href="path/to/firstCSSFile.css">
-            <link rel="stylesheet" type="text/css" href="path/to/secondCSSFile.css">
-        {/foreachcss}
+        <link rel="stylesheet" type="text/css" href="path/to/firstCSSFile.css">
+        <link rel="stylesheet" type="text/css" href="path/to/secondCSSFile.css">
     </head>
 </html>
 ```
